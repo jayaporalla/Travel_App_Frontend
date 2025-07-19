@@ -1,0 +1,72 @@
+.gap-small {
+    gap: 8px;
+}
+
+.host-details .p {
+    color: var(--text-color-primary);
+    font-size: 1rem;
+}
+
+.span {
+    color: var(--text-color-primary);
+    font-size: 0.875rem;
+}
+
+.host-details .span {
+    display: block;
+    padding-top: 10px;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.fs-large {
+    font-size: 1.25rem;
+}
+
+.apps {
+    font-size: 1rem;
+}
+
+.host-details {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--container-border-color);
+}
+
+.hotel-room-details {
+    padding-top: 8px;
+}
+
+.gutter-bottom-small {
+    padding-bottom: 1.5rem;
+}
+
+.amenities {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.amenities-grid {
+    display: grid;
+    flex-wrap: nowrap;
+    gap: 1rem;
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex: 0 0 45%;
+}
+
+.amenity-item span{
+    color: var(--text-color-primary);
+    font-size: 0.875rem;
+    font-weight: normal;
+}
+
+.amenities-container {
+    padding-top: 2rem;
+}

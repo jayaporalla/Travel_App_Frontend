@@ -6,9 +6,10 @@ import {
     HotelCard, 
     Categories, 
     SearchStayWithDate,
-    Filter
+    Filter,
+    AuthModal
 } from "../../components";
-import { useCategory, useDate, useFilter } from "../../context";
+import { useCategory, useDate, useFilter, useAuth } from "../../context";
 import { 
     getHotelsByPrice, 
     getHotelsByRoomsAndBeds, 
@@ -37,6 +38,7 @@ export const Home = () => {
         traveloRating,
         isCancelable
         } = useFilter();
+    const { isAuthModalOpen } = useAuth();
 
     useEffect(() => {
         ( async () => {
@@ -98,10 +100,9 @@ export const Home = () => {
                         </InfiniteScroll>
                     ) : (<></>)
                 }
-                {
-                    isSearchModalOpen && <SearchStayWithDate />
-                }
-                { isFilterModalOpen && <Filter />}
+                {isSearchModalOpen && <SearchStayWithDate />}
+                {isFilterModalOpen && <Filter />}
+                {isAuthModalOpen && <AuthModal />}
         </div>
     )
 }

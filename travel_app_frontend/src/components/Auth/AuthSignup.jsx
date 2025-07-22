@@ -88,10 +88,15 @@ export const AuthSignup = () => {
             isPasswordValid && 
             isConfirmPasswordValid) {
             signupHandler(username, number, email, password);
+
+            authDispatch({
+                type: "SET_TO_LOGIN"
+            })
+
+            authDispatch({
+                type: "CLEAR_USER_DATA"
+            })
         }
-        authDispatch({
-            type: "CLEAR_USER_DATA"
-        })
     };
 
     return (

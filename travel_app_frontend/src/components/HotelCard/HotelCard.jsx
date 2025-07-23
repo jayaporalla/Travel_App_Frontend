@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import "./HotelCard.css";
-import { useWishlist, useAuth } from '../../context';
+import { useWishlist, useAuth, useAlert } from '../../context';
 import { findHotelInWishlist } from '../../utils';
 
 export const HotelCard = ({ hotel }) => {
@@ -8,9 +8,8 @@ export const HotelCard = ({ hotel }) => {
     const { _id, name, image, address, state, rating, price } = hotel;
     const { wishlist, wishlistDispatch } = useWishlist();
     const { accessToken, authDispatch } = useAuth();
-
+    const { setAlert } = useAlert();
     const isHotelInWishlist = findHotelInWishlist(wishlist, _id);
-
     const navigate = useNavigate();
 
     const handleHotelCardClick = () => {
@@ -24,11 +23,20 @@ export const HotelCard = ({ hotel }) => {
                     type: "ADD_TO_WISHLIST",
                     payload: hotel
                 })
-                navigate("/wishlist");
+                setAlert({
+                    open: true,
+                    message: `Hotel:: ${name} added to wishlist`,
+                    type: "success"
+                })
             } else {
                 wishlistDispatch({
                     type: "REMOVE_FROM_WISHLIST",
                     payload: _id
+                })
+                setAlert({
+                    open: true,
+                    message: `Hotel:: ${name} removed from wishlist`,
+                    type: "success"
                 })
             }
         } else {

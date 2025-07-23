@@ -65,3 +65,10 @@
 .cursor-pointer:hover{
     cursor: pointer;
 }
+
+.user-name {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+    color: var(--text-color-primary);
+    font-weight: 500;
+}

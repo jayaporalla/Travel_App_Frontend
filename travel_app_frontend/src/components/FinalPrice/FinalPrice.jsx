@@ -1,5 +1,5 @@
 import "./FinalPrice.css"; 
-import { useDate } from "../../context";
+import { useAuth, useDate, useAlert } from "../../context";
 import { DateSelector } from "../index";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,8 @@ export const FinalPrice = ({ singleHotel }) => {
     const { _id, price, rating } = singleHotel;
     const { guests, dateDispatch, checkInDate, checkOutDate } = useDate();
     const navigate = useNavigate();
+    const { setAlert } = useAlert();
+    const { accessToken, authDispatch } = useAuth();
 
     const handleGuestChange = (e) => {
         dateDispatch({
@@ -17,7 +19,31 @@ export const FinalPrice = ({ singleHotel }) => {
     }
 
     const handleReserveClick = () => {
-        navigate(`/confirm-booking/stay/${_id}`);
+        if(!checkInDate){
+            setAlert({
+                open: true,
+                message: "Select a Check-in Date",
+                type: "info"
+            })
+        } else if(!checkOutDate) {
+            setAlert({
+                open: true,
+                message: "Select a check-out Date",
+                type: "info"
+            })
+        } else if(guests < 1){
+            setAlert({
+                open: true,
+                message: "Add number of guests",
+                type: "info"
+            })
+        } else if(accessToken) {
+            navigate(`/confirm-booking/stay/${_id}`);
+        } else {
+            authDispatch({
+                type: "SHOW_AUTH_MODAL"
+            })
+        }
     }
 
     return (
@@ -56,7 +82,7 @@ export const FinalPrice = ({ singleHotel }) => {
             </div>
             <div className="price-distribution d-flex direction-column">
                 <div className="final-price d-flex align-center justify-space-between">
-                    <span className="span">Rs. { price } * 2 nights</span>
+                    <span className="span">Rs. { price } x 2 nights</span>
                     <span className="span">Rs. { price * 2}</span>
                 </div>
                 <div className="final-price d-flex align-center justify-space-between">

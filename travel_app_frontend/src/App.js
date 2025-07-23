@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, SingleHotel, SearchResults, Wishlist, Payment } from "./pages";
+import { Home, SingleHotel, SearchResults, Wishlist, Payment, OrderSummary } from "./pages";
 import './App.css';
-import { Filter } from './components';
 
 function App() {
   return (
@@ -11,6 +10,7 @@ function App() {
       <Route path='/hotels/:address' element={<SearchResults />}/>
       <Route path='/wishlist' element={<Wishlist />}/>
       <Route path='/confirm-booking/stay/:id' element={<Payment />}/>
+      <Route path='/order-summary' element={<OrderSummary />}/>
     </Routes>
   );
 }

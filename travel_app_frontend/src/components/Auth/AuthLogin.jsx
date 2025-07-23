@@ -1,13 +1,14 @@
 import "./Auth.css";
 import { loginHandler } from "../../services";
 import { validateNumber, validatePassword } from "../../utils";
-import { useAuth } from "../../context";
+import { useAuth, useAlert } from "../../context";
 
 let isNumberValid, isPasswordValid;
 
 export const AuthLogin = () => {
 
     const { number, password, authDispatch } = useAuth();
+    const { setAlert } = useAlert();
 
     const handleNumberChange = (e) => {
         isNumberValid = validateNumber(e.target.value);
@@ -38,7 +39,7 @@ export const AuthLogin = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         if(isNumberValid && isPasswordValid) {
-            const { accessToken, username }  = await loginHandler(number, password);
+            const { accessToken, username }  = await loginHandler(number, password, setAlert);
             authDispatch({
             type: "SET_ACCESS_TOKEN",
             payload: accessToken
@@ -57,7 +58,7 @@ export const AuthLogin = () => {
     };
 
     const handleTestCredentialsClick = async () => {
-        const { accessToken, username }  = await loginHandler(9632587410, "Jaya921@#");
+        const { accessToken, username }  = await loginHandler(9632587410, "Jaya921@#", setAlert);
         authDispatch({
             type: "SET_ACCESS_TOKEN",
             payload: accessToken
@@ -79,7 +80,7 @@ export const AuthLogin = () => {
             <form onSubmit={handleFormSubmit}>
                 <div className="d-flex direction-column lb-in-container">
                     <label className="auth-label">
-                        Mobile Number <span className="asterisk">*</span>
+                        Mobile Number <span className="asterisk">*</span>{" "}
                     </label>
                     <input 
                         type="number"
@@ -93,7 +94,7 @@ export const AuthLogin = () => {
                 </div>
                 <div className="d-flex direction-column lb-in-container">
                     <label className="auth-label">
-                        Password <span className="asterisk">*</span>
+                        Password <span className="asterisk">*</span>{" "}
                     </label>
                     <input 
                         className="auth-input"

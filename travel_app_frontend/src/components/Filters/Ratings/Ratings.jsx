@@ -4,7 +4,7 @@ const ratings = ["1", "2", "3", "4", "5"];
 
 export const Ratings = () => {
 
-    const { traveloRating, filterDispatch } = useFilter();
+    const { filterDispatch } = useFilter();
 
     const handleRatingsClick = (rating) => {
         filterDispatch({
@@ -15,7 +15,7 @@ export const Ratings = () => {
 
     return (
         <div className="filter-container">
-            <span className="filter-label">Star Rating</span>
+            <span className="filter-label">Ratings</span>
             <div className="d-flex align-center gap">
                 {ratings.map(rating => 
                 <span 

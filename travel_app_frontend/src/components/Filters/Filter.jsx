@@ -1,5 +1,11 @@
 import "./Filter.css";
-import { PriceRange, RoomsAndBeds, PropertyType, Ratings, FreeCancel } from "./index";
+import { 
+    PriceRange, 
+    RoomsAndBeds, 
+    PropertyType, 
+    Ratings, 
+    FreeCancel 
+} from "./index";
 import { useFilter } from "../../context";
 
 export const Filter = () => {

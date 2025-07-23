@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import InfiniteScroll from  'react-infinite-scroll-component';
 import { 
@@ -7,9 +7,11 @@ import {
     Categories, 
     SearchStayWithDate,
     Filter,
-    AuthModal
+    AuthModal,
+    ProfileDropDown,
+    Alert
 } from "../../components";
-import { useCategory, useDate, useFilter, useAuth } from "../../context";
+import { useCategory, useDate, useFilter, useAuth, useAlert } from "../../context";
 import { 
     getHotelsByPrice, 
     getHotelsByRoomsAndBeds, 
@@ -22,7 +24,6 @@ import "./Home.css";
 export const Home = () => {
 
     const [hasMore, setHasMore] = useState(true);
-    const [hotelsToShow, setHotelsToShow] = useState([]);
     const [testData, setTestData] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(16);
     const { hotelCategory } = useCategory();
@@ -38,7 +39,8 @@ export const Home = () => {
         traveloRating,
         isCancelable
         } = useFilter();
-    const { isAuthModalOpen } = useAuth();
+    const { isAuthModalOpen, isDropDownModalOpen } = useAuth();
+    const { alert } = useAlert();
 
     useEffect(() => {
         ( async () => {
@@ -81,7 +83,7 @@ export const Home = () => {
 
     return (
         <div className="relative">
-            <Navbar />
+            <Navbar route="home"/>
             <Categories />
                 {
                     hotels && hotels.length > 0 ? (
@@ -100,9 +102,11 @@ export const Home = () => {
                         </InfiniteScroll>
                     ) : (<></>)
                 }
+                {isDropDownModalOpen && <ProfileDropDown />}
                 {isSearchModalOpen && <SearchStayWithDate />}
                 {isFilterModalOpen && <Filter />}
                 {isAuthModalOpen && <AuthModal />}
+                {alert.open && <Alert />}
         </div>
     )
 }

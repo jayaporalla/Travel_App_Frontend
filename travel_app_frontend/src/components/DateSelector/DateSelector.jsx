@@ -1,7 +1,6 @@
 import DatePicker from "react-datepicker";
 import "./DateSelector.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
 import { useDate } from "../../context";
 
 export const DateSelector = ({ placeholder, checkInType }) => {
@@ -29,6 +28,7 @@ export const DateSelector = ({ placeholder, checkInType }) => {
             onFocus={handleDateFocus}
             dateFormat="dd/MM/yyyy" 
             placeholderText="Add Dates" 
+            minDate={new Date()}
             closeOnScroll={true}
         />
     );

@@ -1,5 +1,5 @@
 import "./Auth.css";
-import { useAuth } from "../../context";
+import { useAuth, useAlert } from "../../context";
 import { 
     validateEmail, 
     validateName, 
@@ -13,6 +13,7 @@ let isNumberValid, isNameValid, isPasswordValid, isEmailValid, isConfirmPassword
 export const AuthSignup = () => {
 
     const { username, number, email, password, confirmPassword, authDispatch } = useAuth();
+    const { setAlert } = useAlert();
 
     const handleNumberChange = (e) => {
         isNumberValid = validateNumber(e.target.value);
@@ -87,15 +88,13 @@ export const AuthSignup = () => {
             isEmailValid && 
             isPasswordValid && 
             isConfirmPasswordValid) {
-            signupHandler(username, number, email, password);
-
+            signupHandler(username, number, email, password, setAlert);
             authDispatch({
                 type: "SET_TO_LOGIN"
-            })
-
+            });
             authDispatch({
                 type: "CLEAR_USER_DATA"
-            })
+            });
         }
     };
 
@@ -104,7 +103,7 @@ export const AuthSignup = () => {
             <form onSubmit={handleFormSubmit}>
                 <div className="d-flex direction-column lb-in-container">
                     <label className="auth-label">
-                        Mobile Number <span className="asterisk">*</span>
+                        Mobile Number <span className="asterisk">*</span>{" "}
                     </label>
                     <input 
                         defaultValue={number}
@@ -118,7 +117,7 @@ export const AuthSignup = () => {
                 </div>
                 <div className="d-flex direction-column lb-in-container">
                     <label className="auth-label">
-                        Name <span className="asterisk">*</span>
+                        Name <span className="asterisk">*</span>{" "}
                     </label>
                     <input 
                         className="auth-input"
@@ -130,7 +129,7 @@ export const AuthSignup = () => {
                 </div>
                 <div className="d-flex direction-column lb-in-container">
                     <label className="auth-label">
-                        Email <span className="asterisk">*</span>
+                        Email <span className="asterisk">*</span>{" "}
                     </label>
                     <input 
                         className="auth-input"
@@ -143,7 +142,7 @@ export const AuthSignup = () => {
                 </div>
                 <div className="d-flex direction-column lb-in-container">
                     <label className="auth-label">
-                        Password <span className="asterisk">*</span>
+                        Password <span className="asterisk">*</span>{" "}
                     </label>
                     <input 
                         className="auth-input"
@@ -156,7 +155,7 @@ export const AuthSignup = () => {
                 </div>
                 <div className="d-flex direction-column lb-in-container">
                     <label className="auth-label">
-                        Confirm Password <span className="asterisk">*</span>
+                        Confirm Password <span className="asterisk">*</span>{" "}
                     </label>
                     <input 
                         className="auth-input"

@@ -1,12 +1,25 @@
 import axios from "axios";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { FinalPrice, HotelDetails, HotelImages, Navbar } from "../../components";
+import { useAuth, useDate, useAlert } from "../../context";
+import { 
+    FinalPrice, 
+    HotelDetails, 
+    HotelImages, 
+    Navbar,
+    AuthModal,
+    ProfileDropDown,
+    SearchStayWithDate,
+    Alert
+} from "../../components";
 import "./SingleHotel.css";
 
 export const SingleHotel = () => {
     const { id } = useParams();
     const [singleHotel, setSingleHotel] = useState({});
+    const { isAuthModalOpen, isDropDownModalOpen } = useAuth();
+    const { isSearchModalOpen } = useDate();
+    const { alert } = useAlert();
 
     useEffect(() => {
         (async () => {
@@ -24,7 +37,7 @@ export const SingleHotel = () => {
     const { name, state } = singleHotel;
 
     return (
-        <Fragment>
+        <div className="relative">
             <Navbar />
             <main className="single-hotel-page">
                 <p className="hotel-name-add">{name}, {state}</p>
@@ -34,6 +47,10 @@ export const SingleHotel = () => {
                     <FinalPrice singleHotel={singleHotel}/>
                 </div>
             </main>
-        </Fragment>
+            {isSearchModalOpen && <SearchStayWithDate />}
+            {isDropDownModalOpen && <ProfileDropDown />}
+            {isAuthModalOpen && <AuthModal />}
+            {alert.open && <Alert />}
+        </div>
     );
 };

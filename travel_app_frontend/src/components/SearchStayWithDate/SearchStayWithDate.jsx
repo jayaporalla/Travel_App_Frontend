@@ -66,6 +66,12 @@ export const SearchStayWithDate = () => {
         navigate(`/hotels/${destination}`);
     };
 
+    const handleSearchCloseClick = () => {
+        dateDispatch({
+            type: "CLOSE_SEARCH_MODAL"
+        })
+    }
+
     return (
         <div className="destination-container">
             <div className="destination-options d-flex align-center absolute">
@@ -98,6 +104,11 @@ export const SearchStayWithDate = () => {
                     </span>
                     <span>Search</span>
                 </div>
+                <button className="button absolute close-search-dest"> 
+                    <span className="highlight material-icons-outlined" onClick={handleSearchCloseClick}>
+                        highlight_off
+                    </span>
+                </button>
             </div>
             {isSearchResultOpen && (<div className="search-result-container absolute">
                 {

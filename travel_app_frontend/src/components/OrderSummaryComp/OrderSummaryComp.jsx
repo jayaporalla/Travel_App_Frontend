@@ -5,11 +5,15 @@ import "./OrderSummaryComp.css";
 export const OrderSummaryComp = () => {
 
     const navigate = useNavigate();
-    const { dateDispatch } = useDate();
+    const { checkInDate, checkOutDate, dateDispatch } = useDate();
     const { filterDispatch } = useFilter();
     const { hotel } = useHotel();
     console.log({hotel})
-    const { orderId, name, image, city, state, checkInDate, checkOutDate, totalPayableAmount} = hotel;
+    const { orderId, name, image, city, state, totalPayableAmount} = hotel;
+
+    const formattedCheckInDate = checkInDate instanceof Date ? checkInDate.toDateString() : checkInDate;
+    const formattedCheckOutDate = checkOutDate instanceof Date ? checkOutDate.toDateString() : checkOutDate;
+
 
     const handleContinueBookingClick = () => {
         dateDispatch({
@@ -44,11 +48,11 @@ export const OrderSummaryComp = () => {
             <div className="d-flex direction-column gap">
                 <div className="d-flex direction-column">
                     <span className="span-md">Check In</span>
-                    <p className="fs-md">{checkInDate}, 11:00 AM</p>
+                    <p className="fs-md">{formattedCheckInDate}, 11:00 AM</p>
                 </div>
                 <div className="d-flex direction-column">
                     <span className="span-md">Check Out</span>
-                    <p className="fs-md">{checkOutDate}, 11:00 AM</p>
+                    <p className="fs-md">{formattedCheckOutDate}, 11:00 AM</p>
                 </div>
                 <div className="d-flex direction-column">
                     <div className="d-flex align-center justify-space-between">
